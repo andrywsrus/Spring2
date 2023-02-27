@@ -1,0 +1,63 @@
+<div>
+    <p></p>
+    <h3>Корзина</h3>
+    <p></p>
+
+    <h3>Товары в корзине</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>Наименование товара</td>
+            <td>Цена</td>
+            <td>Количество</td>
+            <td></td>
+            <td>Сумма</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="product in cart.products">
+            <td>{{product.productId}}</td>
+            <td>{{product.productTitle}}</td>
+            <td>{{product.pricePerProduct}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeQuantity(product.productId, -1)">-</button>
+                {{product.quantity}}
+                <button class="btn btn-primary" ng-click="changeQuantity(product.productId, +1)">+</button>
+            </td>
+            <td> х</td>
+            <td>{{product.price}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProductFromCart(product.productId)">Удалить</button>
+            </td>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Итого</td>
+            <td></td>
+            <td>{{cart.totalPrice}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
+            </td>
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+
+    <p></p>
+    <h3>Детали заказа</h3>
+    <form novalidate ng-submit="createOrder()">
+        <input class="form-control" type="text" placeholder="Телефон получателя" ng-model="orderDetails.phone">
+        <p></p>
+        <input class="form-control" type="text" placeholder="Адрес доставки" ng-model="orderDetails.address">
+        <p></p>
+        <button type="submit" class="btn btn-secondary">Оформить заказ</button>
+    </form>
+
+</div>
