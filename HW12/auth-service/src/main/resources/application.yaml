@@ -1,0 +1,29 @@
+server:
+  port: 8187
+  servlet:
+    context-path: /market-auth
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./users;MODE=PostgreSQL
+    username: sa
+    password:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:3000/realms/master
+          jwk-set-uri: http://localhost:3000/realms/master/protocol/openid-connect/certs
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+jwt:
+  secret: Ymj5peSjMsSe77uNCyPHqPcO5tOI5bQIZciJBATt6ZXy
+  lifetime: 6000000
