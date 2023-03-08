@@ -1,0 +1,79 @@
+<div>
+    <p></p>
+    <h3>Каталог товаров</h3>
+    <p></p>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>Наименование товара</td>
+            <td>Цена</td>
+            <td>Действие</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in productsList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changePrice(p.id, -1)">-</button>
+                {{p.price}}
+                <button class="btn btn-primary" ng-click="changePrice(p.id, 1)">+</button>
+
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
+            </td>
+            <td>
+                <button class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation">
+
+        <ul class="pagination">
+            <li class="page-item">
+                <button class="page-link" ng-click="loadProducts(currentPage-1)"><-Пред. стр</button>
+            </li>
+            <li class="page-item" ng-repeat="pageIndex in paginationArray">
+                <button class="page-link" ng-click="loadProducts(pageIndex)">{{pageIndex}}</button>
+            </li>
+            <li class="page-item">
+                <button class="page-link" ng-click="loadProducts(currentPage+1)">След. стр-></button>
+            </li>
+        </ul>
+    </nav>
+
+    <h4>Добавить товар</h4>
+    <div class="add">
+        <div class="container_form">
+            <table class="add">
+                <tbody>
+                <tr>
+                    <td> <div>Имя продукта</div> </td>
+                    <td>&nbsp;&nbsp;&nbsp;</td>
+                    <td> <div>Стоимость продукта</div> </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" placeholder="Имя продукта" name="title" ng-model="product.title"></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><input type="number" placeholder="Стоимость продукта" name="cost" ng-model="product.cost"></td>
+                    <td>&nbsp;&nbsp;&nbsp; <button class="btn btn-success" ng-click="addProduct(product)"> Добавить</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p></p>
+        <h4>Фильтр товаров</h4>
+        <form novalidate ng-submit="loadProducts()">
+            <input class="form-control" type="number" placeholder="минимальная цена" ng-model="filter.min_cost">
+            <p></p>
+            <input class="form-control" type="number" placeholder="максимальная цена" ng-model="filter.max_cost">
+            <p></p>
+            <input class="form-control" type="text" placeholder="название товара" ng-model="filter.part_title">
+            <p></p>
+            <button type="submit" class="btn btn-secondary">Фильтровать</button>
+        </form>
+        <p></p>
+    </div>
